@@ -27,6 +27,7 @@ namespace ServicioComunicacionesModel.DAL
             return instancia;
         }
 
+        //Ubicaciones estaticas para las lecturas de trafico y de consumo
         private string archivoTrafico = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "traficos.txt";
         private string archivoConsumo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "consumos.txt";
 
@@ -39,12 +40,11 @@ namespace ServicioComunicacionesModel.DAL
                 {
                     string texto = null;
                     do
-                    {
-                        
+                    {                        
                         texto = reader.ReadLine();
                         if (texto != null)
                         {
-                            //Parsear El JSON
+                            //Parsear El JSON en el arcchivo
                             Lectura lc = new JavaScriptSerializer().Deserialize<Lectura>(texto);
                             if (lc.Tipo.Equals("Consumo"))
                                 lecturasConsumo.Add(lc);
@@ -56,9 +56,7 @@ namespace ServicioComunicacionesModel.DAL
             {
                 lecturasConsumo = null;
             }
-
             return lecturasConsumo;
-
         }
 
         public List<Lectura> ObtenerLecturasTrafico()
@@ -89,22 +87,15 @@ namespace ServicioComunicacionesModel.DAL
             {
                 lecturasTrafico = null;
             }
-
             return lecturasTrafico;
         }
-
         public void RegistrarLectura(Lectura l)
         {
             string ubicacion = "";
             if (l.Tipo.Equals("Trafico"))
-            {
                 ubicacion = archivoTrafico;
-            }
             else
-            {
                 ubicacion = archivoConsumo;
-            }
-           
 
             string lecturaJSON = new JavaScriptSerializer().Serialize(l);
             try
@@ -120,11 +111,6 @@ namespace ServicioComunicacionesModel.DAL
             {
 
             }
-
-
-
-
-
         }
     }
 }

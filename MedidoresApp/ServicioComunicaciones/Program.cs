@@ -11,24 +11,14 @@ namespace ServicioComunicacionesApp
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
-           
-
-
-
             int puerto = Convert.ToInt32(ConfigurationManager.AppSettings["puerto"]);
             //Console.WriteLine("Iniciando Servidor");
             HiloServidor hiloServidor = new HiloServidor(puerto);
             Thread t = new Thread(new ThreadStart(hiloServidor.Ejecutar));
             
             t.Start();
-            
-       
-
-         
-
         }
     }
 }

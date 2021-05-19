@@ -51,8 +51,18 @@
     <Compile Include="DAL\LecturasDALFactory.cs" />
     <Compile Include="DAL\MedidoresDALArchivos.cs" />
     <Compile Include="DAL\MedidoresDALFactory.cs" />
+    <Compile Include="DTO\Direccion.cs" />
+    <Compile Include="DTO\EstacionServicio.cs" />
     <Compile Include="DTO\Lectura.cs" />
+    <Compile Include="DTO\MedicionConsumo.cs" />
+    <Compile Include="DTO\MedicionTrafico.cs" />
     <Compile Include="DTO\Medidor.cs" />
+    <Compile Include="DTO\MedidorConsumo.cs" />
+    <Compile Include="DTO\MedidorTrafico.cs" />
+    <Compile Include="DTO\PuntoCarga.cs" />
+    <Compile Include="DTO\Region.cs" />
+    <Compile Include="DTO\TarifaElectrica.cs" />
+    <Compile Include="DTO\ZonaHoraria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

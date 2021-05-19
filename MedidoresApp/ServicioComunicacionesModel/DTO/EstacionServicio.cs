@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace ServicioComunicacionesModel.DTO
 {
-    public class Medidor
+    public class EstacionServicio
     {
         int id;
-        Lectura lectura;
-        public int Id { get => id; set => id = value; }
-        public Lectura Lectura { get => lectura; set => lectura = value; }
+        int capacidad;
+        DateTime horarioIncio;
+        DateTime horarioTermino;
+        Direccion direccion;
+
     }
+
 }

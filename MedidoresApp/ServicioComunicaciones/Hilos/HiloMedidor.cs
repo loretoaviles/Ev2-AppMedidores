@@ -24,9 +24,12 @@ namespace ServicioComunicacionesApp.Hilos
         {
             //Aqui se encuentra el protoco de comunicacion del lado del Servidor
             //2-Servidor 
+            Console.ForegroundColor = ConsoleColor.Green;
             string mensaje = medidorSocket.Leer();
-            Console.WriteLine("Datos recibidos desde el Medidor:",mensaje);
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("Datos recibidos desde el Medidor:{0}",mensaje);
             //validar
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Validando datos...");
             //Parsear mensaje
             string[] textoArray = mensaje.Split('|');
@@ -50,15 +53,18 @@ namespace ServicioComunicacionesApp.Hilos
             if (medidorMatch != null && fechaValida)
             {
                 //Medidor encontrado en la lista static
-                String respuesta = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "|WAIT";
-                Console.WriteLine("Medidor encontrado!");
+                string respuesta = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "|WAIT";            
+                Console.WriteLine("Medidor encontrado en la lista!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Enviando al cliente: {0}", respuesta);
                 medidorSocket.Escribir(respuesta);
                 //4-Servidor
                 mensaje = medidorSocket.Leer();
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Respuesta recibida del medidor:{0}",mensaje);
+                Console.ForegroundColor = ConsoleColor.Green;
                 //Parsear mensaje
                 string[] textoArray2 = mensaje.Split('|');
-
                 //Crear medidor
                 Medidor medidorCliente2 = new Medidor()
                 {
@@ -67,11 +73,14 @@ namespace ServicioComunicacionesApp.Hilos
                 };
                 if (!textoArray2[4].Equals("UPDATE"))
                     medidorCliente2.Lectura.Estado = Convert.ToInt32(textoArray2[4]);
+                else
+                    medidorCliente2.Lectura.Estado = 3;
                 //dal save
                 lock (dalL)
                 {
                     dalL.RegistrarLectura(medidorCliente2.Lectura);
                 }
+ 
                 Console.WriteLine("Enviado OK al cliente");
                 medidorSocket.Escribir(medidorCliente2.Id + "|OK");
 
@@ -79,16 +88,13 @@ namespace ServicioComunicacionesApp.Hilos
             else
             {
                 //No valido
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("El medidor no existe en la lista");
                 mensaje = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+"|"+medidorCliente.Id+"|ERROR";
-                Console.WriteLine("Enviando al cliente: {0}",mensaje);
+                Console.WriteLine("Enviando al cliente: {0}",mensaje); 
                 medidorSocket.Escribir(mensaje);
-
-               
-
+                Console.ForegroundColor = ConsoleColor.Green;
             }
-
-
 
             
             medidorSocket.CerrarConexion();

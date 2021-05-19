@@ -27,6 +27,7 @@ namespace ServicioComunicacionesModel.DAL
 
         static List<Medidor> medidores = new List<Medidor>()
         {
+          //Aqui se crean los medidores estaticos existentes en el servidor
            new Medidor(){Id= 1010,Lectura = new Lectura(){Tipo="Trafico"} },
            new Medidor(){Id= 1020,Lectura = new Lectura(){Tipo="Trafico"} },
            new Medidor(){Id= 1030,Lectura = new Lectura(){Tipo="Trafico"} },
@@ -38,12 +39,9 @@ namespace ServicioComunicacionesModel.DAL
            new Medidor(){Id= 1140,Lectura = new Lectura(){Tipo="Consumo"} }
 
         };
-
         public List<Medidor> ObtenerMedidores()
         {
             return medidores;
         }
-
-
     }
 }
